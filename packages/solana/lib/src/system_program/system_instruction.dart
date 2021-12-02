@@ -71,12 +71,12 @@ class SystemInstruction extends Instruction {
       keys.add(AccountMeta(pubKey: feeDiscountPubkey, isSigner: false, isWriteable: false));
     }
 
-    final encodeSide = side == 'buy' ? [0, 0, 0, 0] : [1, 0, 0, 0];
+    final encodeSide = side == 'buy' ? [0, 0, 0, 0] : [0, 0, 0, 1];
     final encodeOrderType = orderType == 'limit'
         ? [0, 0, 0, 0]
         : orderType == 'ioc'
-            ? [1, 0, 0, 0]
-            : [2, 0, 0, 0];
+            ? [0, 0, 0, 1]
+            : [0, 0, 0, 2];
     final bufferList = clientId != null
         ? [
             encodeSide,
