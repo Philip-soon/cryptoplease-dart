@@ -129,41 +129,6 @@ class TokenProgram extends Message {
         ],
       );
 
-  factory TokenProgram.newOrder({
-    required String market,
-    required String openOrders,
-    required String payer,
-    required String owner,
-    required String requestQueue,
-    required String baseVault,
-    required String quoteVault,
-    required String side,
-    required int limitPrice,
-    required int maxQuantity,
-    required String programId,
-    required String orderType,
-    String? clientId,
-    String? feeDiscountPubkey,
-  }) =>
-      TokenProgram._(instructions: [
-        TokenInstruction.newOrder(
-          market: market,
-          openOrders: openOrders,
-          payer: payer,
-          owner: owner,
-          requestQueue: requestQueue,
-          baseVault: baseVault,
-          quoteVault: quoteVault,
-          side: side,
-          limitPrice: limitPrice,
-          maxQuantity: maxQuantity,
-          programId: programId,
-          orderType: orderType,
-          clientId: clientId,
-          feeDiscountPubkey: feeDiscountPubkey,
-        )
-      ]);
-
   static const programId = 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA';
 
   // Instruction indexes

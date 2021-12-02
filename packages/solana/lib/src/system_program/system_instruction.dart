@@ -1,6 +1,7 @@
 import 'package:solana/src/common/byte_array.dart';
 import 'package:solana/src/encoder/account_meta.dart';
 import 'package:solana/src/encoder/buffer.dart';
+import 'package:solana/src/encoder/constants.dart';
 import 'package:solana/src/encoder/instruction.dart';
 import 'package:solana/src/system_program/system_program.dart';
 
@@ -39,6 +40,59 @@ class SystemInstruction extends Instruction {
         ]),
       );
 
+
+  factory SystemInstruction.newOrder({
+    required String market,
+    required String openOrders,
+    required String payer,
+    required String owner,
+    required String requestQueue,
+    required String baseVault,
+    required String quoteVault,
+    required String side,
+    required int limitPrice,
+    required int maxQuantity,
+    required String programId,
+    required String orderType,
+    String? clientId,
+    String? feeDiscountPubkey,
+  }) {
+    final keys = [
+      AccountMeta(pubKey: market, isSigner: false, isWriteable: true),
+      AccountMeta(pubKey: openOrders, isSigner: false, isWriteable: true),
+      AccountMeta(pubKey: requestQueue, isSigner: false, isWriteable: true),
+      AccountMeta(pubKey: payer, isSigner: false, isWriteable: true),
+      AccountMeta(pubKey: owner, isSigner: true, isWriteable: false),
+      AccountMeta(pubKey: baseVault, isSigner: false, isWriteable: true),
+      AccountMeta(pubKey: quoteVault, isSigner: false, isWriteable: true),
+      AccountMeta(pubKey: programId, isSigner: false, isWriteable: false),
+      AccountMeta(pubKey: Sysvar.rent, isSigner: false, isWriteable: false),
+    ];
+    if (feeDiscountPubkey != null) {
+      keys.add(AccountMeta(pubKey: feeDiscountPubkey, isSigner: false, isWriteable: false));
+    }
+
+    final bufferList = clientId != null
+        ? [
+            Buffer.fromString(side),
+            Buffer.fromUint64(limitPrice),
+            Buffer.fromUint64(maxQuantity),
+            Buffer.fromString(orderType),
+            Buffer.fromString(clientId),
+          ]
+        : [
+            Buffer.fromString(side),
+            Buffer.fromUint64(limitPrice),
+            Buffer.fromUint64(maxQuantity),
+            Buffer.fromString(orderType),
+          ];
+    return SystemInstruction(
+      accounts: keys,
+      data: Buffer.fromConcatenatedByteArrays([
+        ...bufferList
+      ]),
+    );
+  }
   /// Construct a create account instruction of the [SystemProgram].
   ///
   /// The [address] is the public key of the new account
