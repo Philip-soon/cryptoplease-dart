@@ -40,7 +40,7 @@ class SystemProgram extends Message {
     required int maxQuantity,
     required String programId,
     required String orderType,
-    String? clientId,
+    int? clientId,
     String? feeDiscountPubkey,
   }) =>
       SystemProgram._(instructions: [

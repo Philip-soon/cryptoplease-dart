@@ -40,7 +40,6 @@ class SystemInstruction extends Instruction {
         ]),
       );
 
-
   factory SystemInstruction.newOrder({
     required String market,
     required String openOrders,
@@ -54,7 +53,7 @@ class SystemInstruction extends Instruction {
     required int maxQuantity,
     required String programId,
     required String orderType,
-    String? clientId,
+    int? clientId,
     String? feeDiscountPubkey,
   }) {
     final keys = [
@@ -72,27 +71,32 @@ class SystemInstruction extends Instruction {
       keys.add(AccountMeta(pubKey: feeDiscountPubkey, isSigner: false, isWriteable: false));
     }
 
+    final encodeSide = side == 'buy' ? [0, 0, 0, 0] : [1, 0, 0, 0];
+    final encodeOrderType = orderType == 'limit'
+        ? [0, 0, 0, 0]
+        : orderType == 'ioc'
+            ? [1, 0, 0, 0]
+            : [2, 0, 0, 0];
     final bufferList = clientId != null
         ? [
-            Buffer.fromString(side),
+            encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
-            Buffer.fromString(orderType),
-            Buffer.fromString(clientId),
+            encodeOrderType,
+            Buffer.fromUint64(clientId),
           ]
         : [
-            Buffer.fromString(side),
+            encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
-            Buffer.fromString(orderType),
+            encodeOrderType,
           ];
     return SystemInstruction(
       accounts: keys,
-      data: Buffer.fromConcatenatedByteArrays([
-        ...bufferList
-      ]),
+      data: Buffer.fromConcatenatedByteArrays([...bufferList]),
     );
   }
+
   /// Construct a create account instruction of the [SystemProgram].
   ///
   /// The [address] is the public key of the new account
