@@ -98,7 +98,6 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint32(maxQuantity).toList().reversed,
             Buffer.fromUint32(0),
             encodeOrderType.toList().reversed,
-            Buffer.fromUint64(0),
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
