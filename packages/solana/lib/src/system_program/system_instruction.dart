@@ -93,8 +93,10 @@ class SystemInstruction extends Instruction {
         : [
             [0, 0, 0, 1],
             encodeSide.toList().reversed,
-            Buffer.fromUint64(limitPrice).toList().reversed,
-            Buffer.fromUint64(maxQuantity).toList().reversed,
+            Buffer.fromUint32(limitPrice).toList().reversed,
+            Buffer.fromUint32(0),
+            Buffer.fromUint32(maxQuantity).toList().reversed,
+            Buffer.fromUint32(0),
             encodeOrderType.toList().reversed,
             Buffer.fromUint64(0),
           ];
