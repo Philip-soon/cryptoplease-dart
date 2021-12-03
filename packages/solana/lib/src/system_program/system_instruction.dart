@@ -15,8 +15,9 @@ class SystemInstruction extends Instruction {
   const SystemInstruction({
     required List<AccountMeta> accounts,
     required ByteArray data,
+    required String programId,
   }) : super(
-          programId: SystemProgram.programId,
+          programId: programId,
           accounts: accounts,
           data: data,
         );
@@ -38,6 +39,7 @@ class SystemInstruction extends Instruction {
           SystemProgram.transferInstructionIndex,
           Buffer.fromInt64(lamports),
         ]),
+        programId: SystemProgram.programId,
       );
 
   factory SystemInstruction.newOrder({
@@ -105,6 +107,7 @@ class SystemInstruction extends Instruction {
     return SystemInstruction(
       accounts: keys,
       data: bufferfromByteArrays,
+      programId: '9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin',
     );
   }
 
@@ -138,5 +141,6 @@ class SystemInstruction extends Instruction {
           Buffer.fromUint64(space),
           Buffer.fromBase58(programId),
         ]),
+        programId: SystemProgram.programId,
       );
 }
