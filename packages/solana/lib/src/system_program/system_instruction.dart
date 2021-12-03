@@ -96,8 +96,6 @@ class SystemInstruction extends Instruction {
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
-    final dddd = bufferfromByteArrays.toString();
-    final temp = int.parse(bufferfromByteArrays.toString(), radix: 16);
 
     return SystemInstruction(
       accounts: keys,
