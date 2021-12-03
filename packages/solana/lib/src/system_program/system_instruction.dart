@@ -91,7 +91,7 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
-            [0, 0, 0, 1],
+            [0, 1],
             encodeSide.toList().reversed,
             Buffer.fromUint32(limitPrice).toList().reversed,
             Buffer.fromUint32(0),
