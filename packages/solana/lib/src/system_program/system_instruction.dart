@@ -93,6 +93,7 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
             encodeOrderType,
+            Buffer.fromUint64(0),
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
