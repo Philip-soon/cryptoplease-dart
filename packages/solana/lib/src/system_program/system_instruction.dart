@@ -92,12 +92,12 @@ class SystemInstruction extends Instruction {
           ]
         : [
             [0, 1],
-            encodeSide.toList().reversed,
-            Buffer.fromUint32(limitPrice).toList().reversed,
+            encodeSide.toList(),
+            Buffer.fromUint32(limitPrice),
             Buffer.fromUint32(0),
-            Buffer.fromUint32(maxQuantity).toList().reversed,
+            Buffer.fromUint32(maxQuantity),
             Buffer.fromUint32(0),
-            encodeOrderType.toList().reversed,
+            encodeOrderType,
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
