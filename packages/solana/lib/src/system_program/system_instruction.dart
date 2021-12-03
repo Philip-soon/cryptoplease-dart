@@ -71,14 +71,16 @@ class SystemInstruction extends Instruction {
       keys.add(AccountMeta(pubKey: feeDiscountPubkey, isSigner: false, isWriteable: false));
     }
 
-    final encodeSide = side == 'buy' ? [0, 0, 0, 0] : [1, 0, 0, 0];
+    final encodeSide = side == 'buy' ? Buffer.fromUint32(0) : Buffer.fromUint32(1);
+
     final encodeOrderType = orderType == 'limit'
-        ? [0, 0, 0, 0]
+        ? Buffer.fromUint32(0)
         : orderType == 'ioc'
-            ? [1, 0, 0, 0]
-            : [2, 0, 0, 0];
+            ? Buffer.fromUint32(1)
+            : Buffer.fromUint32(2);
     final bufferList = clientId != null
         ? [
+            Buffer.fromUint8(1),
             encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
@@ -86,6 +88,7 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
+            Buffer.fromUint8(1),
             encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
