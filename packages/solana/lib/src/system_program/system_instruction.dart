@@ -91,13 +91,13 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
-            Buffer.fromUint32(1).toList().reversed,
+            Buffer.fromUint8(0),
             // [0, 0, 0, 1],
             encodeSide.toList().reversed,
             Buffer.fromUint64(limitPrice).toList().reversed,
-            Buffer.fromUint64(limitPrice).toList().reversed,
+            Buffer.fromUint64(maxQuantity).toList().reversed,
             encodeOrderType.toList().reversed,
-            Buffer.fromUint64(0).toList().reversed,
+            Buffer.fromUint64(0),
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
