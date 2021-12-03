@@ -80,7 +80,7 @@ class SystemInstruction extends Instruction {
             : Buffer.fromUint32(2);
     final bufferList = clientId != null
         ? [
-            Buffer.fromUint32(1),
+            [0, 0, 0, 1],
             encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
@@ -88,7 +88,7 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
-            Buffer.fromUint32(1),
+            [0, 0, 0, 1],
             encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
