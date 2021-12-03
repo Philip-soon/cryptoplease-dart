@@ -78,6 +78,8 @@ class SystemInstruction extends Instruction {
         : orderType == 'ioc'
             ? Buffer.fromUint32(1)
             : Buffer.fromUint32(2);
+    final limitPriceBuffer = Buffer.fromUint64(limitPrice).toList().reversed;
+
     final bufferList = clientId != null
         ? [
             Buffer.fromUint8(0),
@@ -91,10 +93,11 @@ class SystemInstruction extends Instruction {
         : [
             Buffer.fromUint8(0),
             // [0, 0, 0, 1],
-            encodeSide,
-            Buffer.fromUint64(limitPrice),
-            Buffer.fromUint64(maxQuantity),
-            encodeOrderType,
+            encodeSide.toList().reversed,
+            Buffer.fromUint64(limitPrice).toList().reversed,
+            Buffer.fromUint64(limitPrice).toList().reversed,
+            encodeOrderType.toList().reversed,
+            Buffer.fromUint64(0).toList().reversed,
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
