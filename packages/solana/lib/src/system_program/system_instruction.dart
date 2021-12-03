@@ -71,12 +71,12 @@ class SystemInstruction extends Instruction {
       keys.add(AccountMeta(pubKey: feeDiscountPubkey, isSigner: false, isWriteable: false));
     }
 
-    final encodeSide = side == 'buy' ? [0, 0, 0, 0] : [0, 0, 0, 1];
+    final encodeSide = side == 'buy' ? [0, 0, 0, 0] : [1, 0, 0, 0];
     final encodeOrderType = orderType == 'limit'
         ? [0, 0, 0, 0]
         : orderType == 'ioc'
-            ? [0, 0, 0, 1]
-            : [0, 0, 0, 2];
+            ? [1, 0, 0, 0]
+            : [2, 0, 0, 0];
     final bufferList = clientId != null
         ? [
             encodeSide,
@@ -91,9 +91,12 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(maxQuantity),
             encodeOrderType,
           ];
+
+    final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
+
     return SystemInstruction(
       accounts: keys,
-      data: Buffer.fromConcatenatedByteArrays([...bufferList]),
+      data: bufferfromByteArrays,
     );
   }
 
