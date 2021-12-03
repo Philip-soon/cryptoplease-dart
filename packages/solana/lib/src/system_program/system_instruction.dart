@@ -105,7 +105,7 @@ class SystemInstruction extends Instruction {
     return SystemInstruction(
       accounts: keys,
       data: bufferfromByteArrays,
-      programId: 'BJ3jrUzddfuSrZHXSCxMUUQsjKEyLmuuyZebkcaFp2fg',
+      programId: SystemProgram.programId,
     );
   }
 
