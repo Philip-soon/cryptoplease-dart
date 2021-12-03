@@ -80,7 +80,8 @@ class SystemInstruction extends Instruction {
             : Buffer.fromUint32(2);
     final bufferList = clientId != null
         ? [
-            [0, 0, 0, 1],
+            Buffer.fromUint8(0),
+            // [0, 0, 0, 1],
             encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
@@ -88,12 +89,12 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
-            [0, 0, 0, 1],
+            Buffer.fromUint8(0),
+            // [0, 0, 0, 1],
             encodeSide,
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
             encodeOrderType,
-            Buffer.fromUint64(0),
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
