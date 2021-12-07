@@ -93,11 +93,20 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
-            [0, 1],
-            encodeSide.toList(),
-            Buffer.fromUint64(limitPrice),
-            Buffer.fromUint64(maxQuantity),
-            encodeOrderType,
+            Buffer.fromUint8(0),
+            Buffer.fromUint8(1),
+            Buffer.fromUint32(0),
+            // encodeSide,
+            Buffer.fromUint32(limitPrice).toList().reversed,
+            Buffer.fromUint32(0),
+            Buffer.fromUint32(maxQuantity).toList().reversed,
+            Buffer.fromUint32(0),
+            Buffer.fromUint32(1).toList().reversed,
+            // encodeOrderType,
+            Buffer.fromUint64(0),
+            Buffer.fromUint8(0),
+            Buffer.fromUint8(0),
+            Buffer.fromUint8(0),
           ];
 
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([...bufferList]);
