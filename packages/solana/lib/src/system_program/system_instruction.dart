@@ -93,7 +93,7 @@ class SystemInstruction extends Instruction {
             Buffer.fromUint64(clientId),
           ]
         : [
-            [1, 0, 0, 0],
+            [1],
             encodeSide.toList(),
             Buffer.fromUint64(limitPrice),
             Buffer.fromUint64(maxQuantity),
