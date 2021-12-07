@@ -66,7 +66,7 @@ class SystemInstruction extends Instruction {
       AccountMeta(pubKey: owner, isSigner: true, isWriteable: false),
       AccountMeta(pubKey: baseVault, isSigner: false, isWriteable: true),
       AccountMeta(pubKey: quoteVault, isSigner: false, isWriteable: true),
-      AccountMeta(pubKey: programId, isSigner: false, isWriteable: false),
+      AccountMeta(pubKey: 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA', isSigner: false, isWriteable: false),
       AccountMeta(pubKey: Sysvar.rent, isSigner: false, isWriteable: false),
     ];
     if (feeDiscountPubkey != null) {
@@ -105,7 +105,7 @@ class SystemInstruction extends Instruction {
     return SystemInstruction(
       accounts: keys,
       data: bufferfromByteArrays,
-      programId: '9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin',
+      programId: programId,
     );
   }
 
