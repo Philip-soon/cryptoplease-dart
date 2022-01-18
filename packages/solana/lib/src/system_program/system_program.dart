@@ -27,41 +27,6 @@ class SystemProgram extends Message {
       );
 
 
-  factory SystemProgram.newOrder({
-    required String market,
-    required String openOrders,
-    required String payer,
-    required String owner,
-    required String requestQueue,
-    required String baseVault,
-    required String quoteVault,
-    required String side,
-    required int limitPrice,
-    required int maxQuantity,
-    required String programId,
-    required String orderType,
-    int? clientId,
-    String? feeDiscountPubkey,
-  }) =>
-      SystemProgram._(instructions: [
-        SystemInstruction.newOrder(
-          market: market,
-          openOrders: openOrders,
-          payer: payer,
-          owner: owner,
-          requestQueue: requestQueue,
-          baseVault: baseVault,
-          quoteVault: quoteVault,
-          side: side,
-          limitPrice: limitPrice,
-          maxQuantity: maxQuantity,
-          programId: programId,
-          orderType: orderType,
-          clientId: clientId,
-          feeDiscountPubkey: feeDiscountPubkey,
-        )
-      ]);
-
   /// Construct a create account message.
   ///
   /// The [address] is the public key of the new account
