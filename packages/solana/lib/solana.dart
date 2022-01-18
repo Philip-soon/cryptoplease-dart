@@ -8,8 +8,7 @@ export 'src/dto/fee_calculator.dart';
 export 'src/dto/meta.dart' show Meta;
 export 'src/dto/signature_status.dart' show SignatureStatus, TxStatus;
 export 'src/dto/transaction.dart';
-export 'src/encoder/encoder.dart'
-    show Instruction, Message, Buffer, AccountMeta, SignedTx;
+export 'src/encoder/encoder.dart' show Instruction, Message, Buffer, AccountMeta, SignedTx;
 export 'src/exceptions/bad_state_exception.dart';
 export 'src/exceptions/http_exception.dart';
 export 'src/exceptions/json_rpc_exception.dart';
@@ -18,6 +17,7 @@ export 'src/exceptions/transaction_exception.dart';
 export 'src/memo_program/memo_program.dart';
 export 'src/parsed_message/parsed_message.dart';
 export 'src/rpc_client/rpc_client.dart';
+export 'src/serum_program/serum_program.dart';
 export 'src/spl_token/associated_account.dart';
 export 'src/spl_token/spl_token.dart';
 export 'src/system_program/system_program.dart';
