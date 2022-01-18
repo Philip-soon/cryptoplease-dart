@@ -123,8 +123,7 @@ class SerumInstruction extends Instruction {
       programId: programId,
     );
   }
-  
-  // TODO: test first
+
   factory SerumInstruction.matchOrders({
     required String market,
     required String requestQueue,
@@ -163,7 +162,6 @@ class SerumInstruction extends Instruction {
     );
   }
 
-  // TODO: test first
   factory SerumInstruction.cancelOrderV2({
     required String market,
     required String bids,
