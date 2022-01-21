@@ -170,7 +170,8 @@ class SerumInstruction extends Instruction {
     required String openOrders,
     required String owner,
     required String side,
-    required String orderId,
+    required BigInt orderId,
+    required BigInt price,
     required String programId,
   }) {
     final keys = [
@@ -186,11 +187,12 @@ class SerumInstruction extends Instruction {
     final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([
       // version
       Buffer.fromUint8(0),
-      // matchOrders number
-      Buffer.fromUint32(2),
+      // cancelOrderV2 number
+      Buffer.fromUint32(11),
       // side
       encodeSide,
-      Buffer.fromString(orderId),
+      Buffer.fromInt64(orderId.toInt()),
+      Buffer.fromInt64(price.toInt()),
       // Buffer.fromUint8(limit),
       //
     ]);

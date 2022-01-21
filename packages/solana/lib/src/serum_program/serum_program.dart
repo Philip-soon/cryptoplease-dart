@@ -91,7 +91,8 @@ class SerumProgram extends Message {
     required String openOrders,
     required String owner,
     required String side,
-    required String orderId,
+    required BigInt orderId,
+    required BigInt price,
     required String programId,
   }) =>
       SerumProgram._(instructions: [
@@ -104,6 +105,7 @@ class SerumProgram extends Message {
           owner: owner,
           side: side,
           orderId: orderId,
+          price: price,
           programId: programId,
         ),
       ]);
