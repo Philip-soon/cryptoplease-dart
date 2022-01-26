@@ -91,8 +91,8 @@ class SerumProgram extends Message {
     required String openOrders,
     required String owner,
     required String side,
-    required BigInt orderId,
-    required BigInt price,
+    required String orderId,
+    required String price,
     required String programId,
   }) =>
       SerumProgram._(instructions: [

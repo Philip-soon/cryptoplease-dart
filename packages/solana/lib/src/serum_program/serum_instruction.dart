@@ -170,8 +170,8 @@ class SerumInstruction extends Instruction {
     required String openOrders,
     required String owner,
     required String side,
-    required BigInt orderId,
-    required BigInt price,
+    required String orderId,
+    required String price,
     required String programId,
   }) {
     final keys = [
@@ -191,8 +191,9 @@ class SerumInstruction extends Instruction {
       Buffer.fromUint32(11),
       // side
       encodeSide,
-      Buffer.fromInt64(orderId.toInt()),
-      Buffer.fromInt64(price.toInt()),
+      Buffer.fromString(orderId),
+      Buffer.fromString(price),
+
       // Buffer.fromUint8(limit),
       //
     ]);
