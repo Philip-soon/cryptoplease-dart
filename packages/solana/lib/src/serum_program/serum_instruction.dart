@@ -191,8 +191,8 @@ class SerumInstruction extends Instruction {
       Buffer.fromUint32(11),
       // side
       encodeSide,
-      Buffer.fromInt64(price.toInt()),
       Buffer.fromInt64(orderId.toInt()),
+      Buffer.fromInt64(price.toInt()),
       // Buffer.fromUint8(limit),
       //
     ]);
