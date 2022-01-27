@@ -14,6 +14,7 @@ class JsonRpcClient {
   Future<Map<String, dynamic>> request(
     String method, {
     List<dynamic>? params,
+    int retryCount = 0,
   }) async {
     final request = <String, dynamic>{
       'jsonrpc': '2.0',
@@ -39,11 +40,13 @@ class JsonRpcClient {
         throw const FormatException('invalid jsonrpc-2.0 response');
       }
       if (data['error'] != null) {
-        throw JsonRpcException.fromJson(data['error'] as Map<String, dynamic>);
+        if (retryCount > 2) {
+          throw JsonRpcException.fromJson(data['error'] as Map<String, dynamic>);
+        }
+        return this.request(method, params: params, retryCount: retryCount + 1);
       }
       if (!data.containsKey('result')) {
-        throw const FormatException(
-            'object has no result field, invalid jsonrpc-2.0');
+        throw const FormatException('object has no result field, invalid jsonrpc-2.0');
       }
       return data;
     }

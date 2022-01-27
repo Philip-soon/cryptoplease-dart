@@ -110,8 +110,7 @@ const _maxBumpSeed = 255;
 const _maxSeeds = 16;
 const _maxSeedLength = 32;
 
-Iterable<int> _flatten(Iterable<int> concatenated, Iterable<int> current) =>
-    concatenated.followedBy(current).toList();
+Iterable<int> _flatten(Iterable<int> concatenated, Iterable<int> current) => concatenated.followedBy(current).toList();
 
 Future<List<int>> _computeHash(List<int> source) async {
   final hash = await _sha256.hash(source);
@@ -122,10 +121,20 @@ Future<String> _createProgramAddress({
   required Iterable<int> seeds,
   required Iterable<int> programId,
 }) async {
-  final seedBytes = seeds
-      .followedBy(programId)
-      .followedBy(_magicWord)
-      .toList(growable: false);
+  final seedBytes = seeds.followedBy(programId).followedBy(_magicWord).toList(growable: false);
+  final data = await _computeHash(seedBytes);
+  if (isPointOnEd25519Curve(data)) {
+    throw const FormatException('failed to create address with provided seeds');
+  } else {
+    return base58encode(data);
+  }
+}
+
+Future<String> createProgramAddress({
+  required Iterable<int> seeds,
+  required Iterable<int> programId,
+}) async {
+  final seedBytes = seeds.followedBy(programId).followedBy(_magicWord).toList(growable: false);
   final data = await _computeHash(seedBytes);
   if (isPointOnEd25519Curve(data)) {
     throw const FormatException('failed to create address with provided seeds');
