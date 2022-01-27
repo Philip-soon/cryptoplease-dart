@@ -124,7 +124,6 @@ Future<String> _createProgramAddress({
 }) async {
   final seedBytes = seeds.followedBy(programId).followedBy(_magicWord).toList(growable: false);
   final data = await _computeHash(seedBytes);
-  return base58encode(data);
   if (isPointOnEd25519Curve(data)) {
     throw const FormatException('failed to create address with provided seeds');
   } else {
@@ -138,6 +137,8 @@ Future<String> createProgramAddress({
 }) async {
   final seedBytes = seeds.followedBy(programId).followedBy(_magicWord).toList(growable: false);
   final data = await _computeHash(seedBytes);
+  return base58encode(data);
+
   if (isPointOnEd25519Curve(data)) {
     throw const FormatException('failed to create address with provided seeds');
   } else {
