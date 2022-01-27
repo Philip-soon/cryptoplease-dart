@@ -84,7 +84,6 @@ class TokenInstruction extends Instruction {
         ]),
       );
 
-
   /// Mint the [destination] account with [amount] tokens of the [mint] token.
   /// The [authority] is the mint authority of the token.
   ///
@@ -107,5 +106,19 @@ class TokenInstruction extends Instruction {
           TokenProgram.mintToInstructionIndex,
           Buffer.fromUint64(amount),
         ]),
+      );
+
+  factory TokenInstruction.closeAccount({
+    required String source,
+    required String destination,
+    required String owner,
+  }) =>
+      TokenInstruction._(
+        accounts: [
+          AccountMeta.writeable(pubKey: source, isSigner: false),
+          AccountMeta.writeable(pubKey: destination, isSigner: false),
+          AccountMeta.readonly(pubKey: owner, isSigner: false),
+        ],
+        data: TokenProgram.closeAccountInstructionIndex,
       );
 }

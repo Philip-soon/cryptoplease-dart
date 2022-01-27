@@ -129,6 +129,21 @@ class TokenProgram extends Message {
         ],
       );
 
+  factory TokenProgram.closeAccount({
+    required String source,
+    required String destination,
+    required String owner,
+  }) =>
+      TokenProgram._(
+        instructions: [
+          TokenInstruction.closeAccount(
+            source: source,
+            destination: destination,
+            owner: owner,
+          )
+        ],
+      );
+
   static const programId = 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA';
 
   // Instruction indexes
@@ -136,6 +151,7 @@ class TokenProgram extends Message {
   static const initializeAccountInstructionIndex = [1];
   static const transferInstructionIndex = [3];
   static const mintToInstructionIndex = [7];
+  static const closeAccountInstructionIndex = [9];
 
   // This is computed by adding the bytes in the following
   // structure
