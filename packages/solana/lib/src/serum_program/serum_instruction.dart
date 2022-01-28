@@ -232,9 +232,17 @@ class SerumInstruction extends Instruction {
       keys.add(AccountMeta.writeable(pubKey: referrerQuoteWallet, isSigner: false));
     }
 
+    final bufferfromByteArrays = Buffer.fromConcatenatedByteArrays([
+      // version
+      Buffer.fromUint8(0),
+      // matchOrders number
+      Buffer.fromUint32(5),
+      //
+    ]);
+
     return SerumInstruction(
       accounts: keys,
-      data: [],
+      data: bufferfromByteArrays,
       programId: programId,
     );
   }
